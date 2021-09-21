@@ -1,4 +1,4 @@
-
+// 简单
 var minCostClimbingStairs = function(cost) {
     const n = cost.length;
     const dp = new Array(n + 1);
