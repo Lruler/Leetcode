@@ -17,4 +17,3 @@ digits[0] = 1;
 digits.push(0);
 return digits;
 };
-</

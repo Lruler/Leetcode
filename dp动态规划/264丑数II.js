@@ -1,5 +1,5 @@
 
-// 给你一个整数n 找出并返回第n个整数
+// 给你一个整数n 找出并返回第n个整数 中等
 var nthUglyNumber = function (n) {
     let ret = [1],
         p2 = 0,

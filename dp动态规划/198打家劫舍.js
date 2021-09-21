@@ -1,3 +1,5 @@
+//中等
+
 var rob = function (nums) {
     if (nums === null || nums.length === 0) {
         return 0;

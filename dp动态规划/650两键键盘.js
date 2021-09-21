@@ -1,3 +1,4 @@
+// 中等
 var minSteps = function(n) {
     let dp = new Array(n+1)
     dp[0] = dp[1] = 0;
