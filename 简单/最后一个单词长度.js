@@ -5,4 +5,3 @@ var lengthOfLastWord = function (s) {
 	else return 0
 }
 
-// lengthOfLastWord("   fly me   to   the moon  ")
