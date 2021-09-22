@@ -3,15 +3,15 @@ const defaultEquals = (a, b) => {
     return a === b
 }
 // 定义节点类
-class Node{
+class Node {
     constructor(element){
         this.element = element
         this.next = null
         this.prev = null
     }
 }
-// 定义单项链表
-class linkList{
+// 定义单向链表
+class LinkList {
     constructor(equalsFn = defaultEquals) {
         this.size = 0;  // 单链表的长度
         this.currNode = '';  // 当前节点的指向
@@ -132,3 +132,24 @@ class linkList{
         return objString
     }
 }
+// 定义双向链表
+class DoublyLinkList extends LinkList {
+    constructor (equalsFn = defaultEquals) {
+        super (equalsFn)
+        this.tail = undefined
+    }
+
+    //插入 分三种情况 头部 尾部 中间任意部分
+    //移除 一样的三种情况
+}
+
+// 定义循环链表 就是最后一个节点的尾指针指向头节点
+class CircularLinkList extends LinkList {
+    constructor (equalsFn = defaultEquals) {
+        super (equalsFn)
+    }
+}
+
+// 定义有序链表。。。
+
+// 可以用双向链表定义栈
