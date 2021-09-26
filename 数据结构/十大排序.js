@@ -81,5 +81,45 @@ function mergeSort(arr) {  // 采用自上而下的递归方法
 }
 
 // 快速排序 nlogn 不稳定
+function quickSort (arr) {
+    return quick(arr, 0, arr.length - 1)
+}
 
-console.log(mergeSort([7,5,4,1,12]));
+const partition = (array, left, right) => {
+    const pivot = array[Math.floor((right + left) / 2)]
+    let i = left
+    let j = right
+    
+    while (i <= j) {
+        while (array[i] < pivot) {
+            i++
+        }
+        while (array[i] > pivot) {
+            j--
+        }
+        if (i <= j) {
+            swap(array, i, j)
+            i++
+            j--
+        }
+    }
+    return i
+}
+
+const quick = (array, left, right) => {
+    let index
+
+    if (array.length > 1) {
+        index = partition(array, left, right)
+        if (left < index - 1) {
+            quick(array, left, index - 1)
+        }
+        if (index < right) {
+            quick(array, index, right)
+        }
+    }
+    return array
+}
+
+
+console.log(quickSort([1,2,7,5,4,3,12]));
