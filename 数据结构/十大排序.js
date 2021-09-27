@@ -122,7 +122,6 @@ const quick = (array, left, right) => {
 }
 
 // 希尔排序 nlogn 不稳定
-例
 function shellSort(arr) {
     var len = arr.length,
         temp,
@@ -141,3 +140,48 @@ function shellSort(arr) {
     }
     return arr;
 }
+
+
+// 堆排序 nlogn 稳定
+
+function heapSort(arr) {
+    let len
+
+    function buildMaxHeap(arr) {
+        len = arr.length
+        for (var i = Math.floor(len/2); i >= 0; i--) {
+            heapify(arr, i);
+        }
+    }
+
+    function heapify(arr, i) {     // 堆调整
+        var left = 2 * i + 1,
+            right = 2 * i + 2,
+            largest = i;
+    
+        if (left < len && arr[left] > arr[largest]) {
+            largest = left;
+        }
+    
+        if (right < len && arr[right] > arr[largest]) {
+            largest = right;
+        }
+    
+        if (largest != i) {
+            swap(arr, i, largest);
+            heapify(arr, largest);
+        }
+    }
+
+    buildMaxHeap(arr)
+
+    for (let i = arr.length - 1; i > 0; i++) {
+        swap(arr, 0, i)
+        len--
+        heapify(arr, 0)
+    }
+
+    return arr
+}
+
+console.log(heapSort([3,7,4,2,1,9,87,123,22,4,5]));
