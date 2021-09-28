@@ -85,10 +85,6 @@ class List {
          })
     }
 }
-
-let list1 = new List(1,2,3,4)
-let list2 = new List(2,4,5,7,8)
-
 // 得并集 销毁B表的操作
 const union = (list1,list2) => {
     while(!list2.listEmpty()){
@@ -144,6 +140,14 @@ const subtraction = (list1,list2) => {
     return list
 }
 
+
+let list1 = new List(1,2,3,4)
+let list2 = new List(2,3,5,6,7)
+
+union2(list1,list2)
+intersection(list1,list2)
+subtraction(list1,list2)
+subtraction(list2,list1)
 
 
 
