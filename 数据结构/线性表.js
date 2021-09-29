@@ -110,9 +110,8 @@ const union2 = (list1,list2) => {
             list.listInsert(list.listLength(),e)
         }
     }
-    console.log(list1);
-    console.log(list2);
-    console.log(list);
+    console.log(list1.list,list2.list);
+    console.log('A U B',list.list);
     return list
 }
 // 得交集 
@@ -124,7 +123,7 @@ const intersection = (list1,list2) => {
             list.listInsert(list.listLength(),e)
         }
     }
-    console.log(list);
+    console.log('A n B',list.list);
     return list
 }
 // 得差集
@@ -136,8 +135,7 @@ const subtraction = (list1,list2) => {
             list.listInsert(list.listLength(),e)
         }
     }
-    console.log(list);
-    return list
+    return list.list
 }
 
 
@@ -146,8 +144,8 @@ let list2 = new List(2,3,5,6,7)
 
 union2(list1,list2)
 intersection(list1,list2)
-subtraction(list1,list2)
-subtraction(list2,list1)
+console.log('A - B', subtraction(list1,list2));
+console.log('B - A', subtraction(list2,list1));
 
 
 
