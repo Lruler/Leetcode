@@ -1,4 +1,4 @@
-// 队列是一种遵循先进先出(FIFO)原则的数据结构
+// 单队列是一种遵循先进先出(FIFO)原则的数据结构
 class Queue {
     constructor() {
         this.count = 0
@@ -46,5 +46,14 @@ class Queue {
         }
 
         return objString
+    }
+}
+
+// 双端队列 可同时从前端和后端添加或移除元素的特殊队列 队列+栈的数据结构
+class Deque {
+    constructor() {
+        this.count = 0
+        this.lowestCount
+        this.items = {}
     }
 }
