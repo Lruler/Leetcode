@@ -1,5 +1,6 @@
 // 栈是一种遵从后进先出的LIFO原则的有序集合
-class Stack {
+// 基于数组
+class StackArray {
     constructor() {
         this.itmes = []
     }
@@ -26,5 +27,60 @@ class Stack {
 
     clear() {
         return this.items = []
+    }
+}
+
+// 基于对象
+class Stack {
+
+    constructor() {
+        this.count = 0
+        this.itmes = {}
+    }
+
+    push(e) {
+        this.items[this.count] = e
+        this.count++
+    }
+
+    pop() {
+        if (this.isEmpty()) {
+            return undefined
+        }
+        this.count--
+        const result = this.itmes[this.count]
+        delete this.itmes[this.count]
+        return result
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return undefined
+        }
+        return this.items[this.count]
+    }
+
+    size() {
+        return this.count
+    }
+
+    isEmpty() {
+        return this.count === 0
+    }
+
+    clear() {
+        this.items = {}
+        this.count = 0
+    }
+
+    toString() {
+        if (this.isEmpty()) {
+            return ''
+        }
+        let objString = `${this.items[0]}`
+        for (let i = 0; i < this.count; i++) {
+            objString = `${objString}, ${this.items[i]}`
+        }
+        return objString
     }
 }
