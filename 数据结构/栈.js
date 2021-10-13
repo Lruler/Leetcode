@@ -84,3 +84,8 @@ class Stack {
         return objString
     }
 }
+
+// 还有基于链表
+class StackList {
+    
+}
