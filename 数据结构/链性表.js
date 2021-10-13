@@ -265,15 +265,52 @@ class HeadLinkList {
     }
 }
 
-
-
-
-let list = new HeadLinkList()
-
-list.insert('zk', 0)
-list.insert('ljz', 1)
-list.insert('txn', 2)
-list.insert('zyn', 3)
-list.push('wff')
-
-console.log(list.toString());
+// 初始化链表
+const list1 = new LinkList();
+const list2 = new LinkList();
+const interList = new LinkList();
+const unionList = new LinkList();
+const subtraList = new LinkList()
+list1.push(1);
+list1.push(2);
+list1.push(3);
+list1.push(4);
+list2.push(3);
+list2.push(4);
+list2.push(5);
+list2.push(6);
+// 交集
+const intersection = (list1, list2) => {
+    const len = list1.size
+    for (let i = 0; i < len; i++) {
+        const e = list1.getElementAt(i).element
+        if (list2.find(e) != undefined) interList.push(e)
+    }
+    console.log(interList.toString());
+}
+// 并集
+const unionSet = (list1, list2) => {
+    const len1 = list1.size
+    const len2 = list2.size
+    for (let i = 0; i < len1; i++) {
+        const e = list1.getElementAt(i).element
+        unionList.push(e)
+    }
+    for (let i = 0; i < len2; i++) {
+        const e = list2.getElementAt(i).element
+        if (list1.find(e) != undefined) continue
+        unionList.push(e)
+    }
+    console.log(unionList.toString());
+}
+// unionSet(list1,list2)
+// 差集
+const subtraction = (list1, list2) => {
+    const len1 = list1.size
+    for (let i = 0; i < len1; i++) {
+        const e = list1.getElementAt(i).element
+        if (list2.find(e) == undefined) subtraList.push(e)
+    }
+    console.log(subtraList.toString());
+}
+subtraction(list1,list2)
