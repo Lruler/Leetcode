@@ -87,5 +87,5 @@ class Stack {
 
 // 还有基于链表
 class StackList {
-    
+
 }
