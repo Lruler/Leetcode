@@ -123,7 +123,9 @@ const d = new Student(4, '小刚', 72)
 const e = new Student(5, '小蜘蛛', 55)
 
 const students = new List(a, b, c, d, e)
-console.log(students);
+for (i = 1; i <= students.list.length; i++) {
+    console.log(`第${i}个学生`, students.list[i-1]);
+}
 console.log('经过排序后')
 const newStudents = radixSort(students.list, 3)
 console.log(newStudents);
