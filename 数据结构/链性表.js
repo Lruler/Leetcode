@@ -286,7 +286,7 @@ const intersection = (list1, list2) => {
         const e = list1.getElementAt(i).element
         if (list2.find(e) != undefined) interList.push(e)
     }
-    console.log(interList.toString());
+    console.log(`交集是${interList.toString()}`);
 }
 // 并集
 const unionSet = (list1, list2) => {
@@ -301,9 +301,8 @@ const unionSet = (list1, list2) => {
         if (list1.find(e) != undefined) continue
         unionList.push(e)
     }
-    console.log(unionList.toString());
+    console.log(`并集是${unionList.toString()}`);
 }
-// unionSet(list1,list2)
 // 差集
 const subtraction = (list1, list2) => {
     const len1 = list1.size
@@ -311,6 +310,9 @@ const subtraction = (list1, list2) => {
         const e = list1.getElementAt(i).element
         if (list2.find(e) == undefined) subtraList.push(e)
     }
-    console.log(subtraList.toString());
+    console.log(`差集是${subtraList.toString()}`);
 }
-subtraction(list1,list2)
+console.log(`list1是${list1.toString()}   list2是${list2.toString()}`)
+intersection(list1, list2)
+unionSet(list1,list2)
+subtraction(list1, list2)
