@@ -5,29 +5,47 @@
 输入： flowerbed = [1, 0, 0, 0, 1], n = 1
 输出： true
 */
+// 贪心跳格子
 
-var canPlaceFlowers = function (flowerbed, n) {
-    let f = 0
-    const len = flowerbed.length
-    for (let i = 0; i < len; ++i) {
+/* var canPlaceFlowers = function (flowerbed, n) {
+    let count = 0;
+    const m = flowerbed.length;
+    let prev = -1;
+    for (let i = 0; i < m; i++) {
         if (flowerbed[i] === 1) {
-            if (flowerbed[i + 2] == 1 || flowerbed[i + 2] == undefined) continue;
-            else {
-                flowerbed[i + 2] = 1
-                f++
+            if (prev < 0) {
+                count += Math.floor(i / 2);
+            } else {
+                count += Math.floor((i - prev - 2) / 2);
             }
+            if (count >= n) {
+                return true;
+            }
+            prev = i;
         }
     }
-    for (let i = len - 1; i > -1; --i) {
-        if (flowerbed[i] === 1) {
-            if (flowerbed[i - 2] == 1 || flowerbed[i - 2] == undefined) continue
-            else {
-                flowerbed[i - 2] = 1
-                f++
-            }
+    if (prev < 0) {
+        count += (m + 1) / 2;
+    } else {
+        count += (m - prev - 1) / 2;
+    }
+    return count >= n;
+}; */
+
+const canPlaceFlowers = (f, n) => {
+    const len = f.length
+    for (let i = 0; i < len && n > 0; ) {
+        if (f[i] == 1) {
+            i+=2
+        }
+        else if (i == len - 1 || f[i + 1] != 1) {
+            n--
+            i+=2
+        } 
+        else {
+            i+=3
         }
     }
-    return f == n
-};
-
-console.log(canPlaceFlowers([1,0,0,0,1],1))
+    return n<=0
+}
+console.log(canPlaceFlowers([0],1))
