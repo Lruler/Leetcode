@@ -23,11 +23,16 @@ const reconstructQueue = (people) => {
         if (a[0] === b[0]) return a[1] - b[1]
         else return b[0] - a[0]
     })
+    console.log(people)
     for (let i = 0; i < people.length; i++) {
         // 重新插入到 k 所表示到位置
         res.splice(people[i][1], 0, people[i]);   
     }
     return res 
 }
+/* 
+贪心思路 ： 贪心什么情况，就是我的k是多少，最优情况就是，我前面就有k人，不会有人比我高，所以身高要从高往下排
+然后k决定前面的人数 所以k从小往大排
 
+*/
 console.log(reconstructQueue([[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]))
