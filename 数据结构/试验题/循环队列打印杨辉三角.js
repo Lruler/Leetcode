@@ -52,3 +52,10 @@ class MyCircularQueue {
         }
     }
 }
+
+// 打印杨辉三角的函数
+
+const logYangHui = (row) => {
+        
+
+}
