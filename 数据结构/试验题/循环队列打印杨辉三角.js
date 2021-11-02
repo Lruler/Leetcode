@@ -1,4 +1,10 @@
 // 定义循环队列的类
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 class CircularQueue {
     constructor(k) {
         this.list = Array(k) // 创建一个长度为k的空数组
@@ -30,9 +36,10 @@ class CircularQueue {
     }
     deQueue() {
         if (!this.isEmpty()) {
+            const e = this.list[this.front]
             this.list[this.front] = ''
             this.front = (this.front + 1) % this.max
-            return true
+            return e
         } else {
             return false
         }
@@ -52,34 +59,28 @@ class CircularQueue {
         }
     }
 }
-
 // 打印杨辉三角的函数
-
 const logYangHui = (row) => {
+    row += 1
     let yang = new CircularQueue(row + 2)
     let i, s, e, k
     console.log(`1`);
+    console.log(`\n`)
     yang.enQueue(0)
     yang.enQueue(1)
     yang.enQueue(1)
     k = 1
         while (k < row) {
-            // //每往下一行，其第一个数字都需往左移动 1 个占位
-            // for (i = 1; i <= row - k; i++) {
-            //     console.log("   ");
-            // }
             // 0 作为转行符，入队列
             yang.enQueue(0)
             do {
                 //队头元素出队列
-                s = yang.Front()
-                yang.deQueue()
+                s = yang.deQueue()
                 //取新的队头元素
                 e = yang.Front()
                 //如果所取元素非 0，则输出，否则做转行操作
-                console.log(e,'e是啥')
-                if (e) {
-                    console.log(e);
+                if (e !== -1 && e) {
+                    console.log(e, '!');
                 } else {
                     console.log("\n");
                 }
@@ -92,10 +93,12 @@ const logYangHui = (row) => {
         while (!yang.isEmpty()) {
             e = yang.Front()
             yang.deQueue()
-            console.log(e, '这里有吗');
+            console.log(e);
         }
 }
 
-
-
-logYangHui(5)
+rl.question('请输入打印的行数:', (p) => {
+    p = +p
+    logYangHui(p)
+    rl.close()
+});
