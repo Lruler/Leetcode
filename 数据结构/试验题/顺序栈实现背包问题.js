@@ -39,7 +39,7 @@ class StackArray {
 // 背包函数
 const knapsack = (pack, target) => {
     const packStack = new StackArray();
-    const n = pack.length;
+    const n = pack.length; // 背包数量
     for (let k = 0; !packStack.isEmpty() || k < n; k++) {
         for (; target > 0 && k < n;) {
             if (target - pack[k] >= 0) {
@@ -49,7 +49,7 @@ const knapsack = (pack, target) => {
             k++
         }
         if (target == 0) {
-            let w = packStack.stackTraverse()
+            let w = packStack.stackTraverse() // 输出栈
             let newPack = []
             for (let i = 0; i < w.length; i++) {
                 newPack.push(pack[w[i]])
