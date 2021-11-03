@@ -1,0 +1,28 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+const findSubStr = (str1, str2) => {
+    if (str1.length > str2.length) {
+        [str1, str2] = [str2, str1]
+    }
+    let result = "";
+    const len = str1.length;
+    for (let j = len; j > 0; j--) {
+        for (let i = 0; i <= len - j; i++) {
+            result = str1.substr(i, j);
+            if (str2.includes(result)) return result
+        }
+    }
+}
+rl.question('请输入第一个串:', (p) => {
+    let string1 = p
+    rl.question('请输入第二个串:', (t) => {
+        let string2 = t
+        const a = findSubStr(string1, string2)
+        console.log(a)
+        rl.close();
+    });
+});
