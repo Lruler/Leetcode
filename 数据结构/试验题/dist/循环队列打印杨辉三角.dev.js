@@ -99,15 +99,26 @@ var logYangHui = function logYangHui(row) {
   row += 1;
   var yang = new CircularQueue(row + 2);
   var i, s, e, k;
-  console.log("1");
-  console.log("\n");
+  var b = '';
+
+  for (i = 0; i < row - 1; i++) {
+    b += " ";
+  }
+
+  console.log("".concat(b, "1"));
   yang.enQueue(0);
   yang.enQueue(1);
   yang.enQueue(1);
   k = 1;
 
   while (k < row) {
-    // 0 作为转行符，入队列
+    var a = "";
+
+    for (i = 0; i < row - 1 - k; i++) {
+      a += " ";
+    } // 0 作为转行符，入队列
+
+
     yang.enQueue(0);
 
     do {
@@ -117,9 +128,9 @@ var logYangHui = function logYangHui(row) {
       e = yang.Front(); //如果所取元素非 0，则输出，否则做转行操作
 
       if (e !== -1 && e) {
-        console.log(e, '!');
+        a = a + e + " ";
       } else {
-        console.log("\n");
+        if (a !== '') console.log(a);
       }
 
       yang.enQueue(s + e);
@@ -127,15 +138,6 @@ var logYangHui = function logYangHui(row) {
 
 
     k++;
-  }
-
-  e = yang.Front();
-  yang.deQueue();
-
-  while (!yang.isEmpty()) {
-    e = yang.Front();
-    yang.deQueue();
-    console.log(e);
   }
 };
 

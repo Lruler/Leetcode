@@ -64,13 +64,20 @@ const logYangHui = (row) => {
     row += 1
     let yang = new CircularQueue(row + 2)
     let i, s, e, k
-    console.log(`1`);
-    console.log(`\n`)
+    let b = ''
+    for (i = 0; i < row - 1; i++) {
+        b+=" "
+    }
+    console.log(`${b}1`);
     yang.enQueue(0)
     yang.enQueue(1)
     yang.enQueue(1)
     k = 1
-        while (k < row) {
+    while (k < row) {
+        let a = ""
+            for (i = 0; i < row - 1 - k; i++) {
+                a += " "
+            }
             // 0 作为转行符，入队列
             yang.enQueue(0)
             do {
@@ -80,20 +87,13 @@ const logYangHui = (row) => {
                 e = yang.Front()
                 //如果所取元素非 0，则输出，否则做转行操作
                 if (e !== -1 && e) {
-                    console.log(e, '!');
+                    a = a + e + " "
                 } else {
-                    console.log("\n");
+                    if (a !== '') console.log(a)
                 }
                 yang.enQueue(s + e)
             } while (e != 0); //一旦 e 值为 0，即做转行操作，退出循环，开始新一行的排列
             k++;
-        }
-        e = yang.Front()
-        yang.deQueue()
-        while (!yang.isEmpty()) {
-            e = yang.Front()
-            yang.deQueue()
-            console.log(e);
         }
 }
 
