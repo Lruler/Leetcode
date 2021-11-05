@@ -4,6 +4,27 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+const includes = (father, son) => {
+    let a = 0
+    let res = []
+    for (let i = 0; i < father.length; i++) {
+        if (res.join("") === son) return true
+        if (father[i] === son[a]) {
+            a++
+            res.push(father[i])
+        } else {
+            if (res.length === 0) {
+                continue
+            } else {
+                res.pop()
+                a--
+            }
+        }
+    }
+    res = res.join("")
+    return res === son
+}
+
 const findSubStr = (str1, str2) => {
     if (str1.length > str2.length) {
         [str1, str2] = [str2, str1]
@@ -17,6 +38,7 @@ const findSubStr = (str1, str2) => {
         }
     }
 }
+
 rl.question('请输入第一个串:', (p) => {
     let string1 = p
     rl.question('请输入第二个串:', (t) => {
