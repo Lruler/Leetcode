@@ -25,6 +25,16 @@ const includes = (father, son) => {
     return res === son
 }
 
+const substr = (str, i, j) => {
+    let newStr = ''
+    let a = i
+    for(; i < a + j; i++) {
+        newStr += str[i]
+    }
+    return newStr
+}
+
+
 const findSubStr = (str1, str2) => {
     if (str1.length > str2.length) {
         [str1, str2] = [str2, str1]
@@ -33,8 +43,8 @@ const findSubStr = (str1, str2) => {
     const len = str1.length;
     for (let j = len; j > 0; j--) {
         for (let i = 0; i <= len - j; i++) {
-            result = str1.substr(i, j);
-            if (str2.includes(result)) return result
+            result = substr(str1, i, j)
+            if (includes(str2, result)) return result
         }
     }
 }
