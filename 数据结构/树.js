@@ -50,7 +50,7 @@ class BinarySearchTree {
             this.preOrderTraverseNode(node.right, callback)
         }
     }
-    // 后序遍历 （先访问节点的后代节点，再访问节点本身， 应用计算目录及其子目录所有文件所占空间大小
+    // 后序遍历 （先访问节点的后代节点，再访问节点本身， 应用计算目录及其子目录所有文件所占空间大小
     postOrderTraverse(callback) {
         this.postOrderTraverseNode(this.root, callback)
     }
