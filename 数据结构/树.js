@@ -133,7 +133,23 @@ class BinarySearchTree {
     }
 }
 // 自平衡树
+class AVLTree extends BinarySearchTree {
+    constructor() {
+        this.root = null
+    }
+    getNodeHeight(node) {
+        if (node == null) {
+            return -1
+        }
+        return Math.max(
+            this.getNodeHeight(node.left), this.getNodeHeight(node.right)
+        )
+    }
 
+}
+// 算了先不写，是为了防止二叉树某一边过度衍生出来的
+
+// 红黑树
 
 // const printNode = (value) => console.log(value)
 // tree.preOrderTraverse(printNode)
