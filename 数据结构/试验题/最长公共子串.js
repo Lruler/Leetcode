@@ -44,6 +44,7 @@ const findSubStr = (str1, str2) => {
     for (let j = len; j > 0; j--) {
         for (let i = 0; i <= len - j; i++) {
             result = substr(str1, i, j)
+            console.log(result)
             if (includes(str2, result)) return result
         }
     }

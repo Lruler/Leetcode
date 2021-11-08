@@ -5,6 +5,9 @@ class Node {
         this.right = null
     }
 }
+const printNode = (value) => {
+    console.log(value)
+}
 // 二叉树
 class BinarySearchTree {
     constructor() {
@@ -150,12 +153,13 @@ class AVLTree extends BinarySearchTree {
 // 算了先不写，是为了防止二叉树某一边过度衍生出来的
 
 // 红黑树
-
-// const printNode = (value) => console.log(value)
 // tree.preOrderTraverse(printNode)
 // tree.inOrderTraverse(printNode)
 
 
+console.log('B' > 'A');
+// t.postOrderTraverse(printNode)
+// t.inOrderTraverse(printNode)
 
 
 
