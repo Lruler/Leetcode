@@ -19,12 +19,16 @@ var printfNode = function printfNode(key) {
   a += key;
 };
 
+var i = -1;
+var nodeList = [];
+
 var Node = function Node(key) {
   _classCallCheck(this, Node);
 
   this.key = key;
   this.left = null;
   this.right = null;
+  this.father = null;
 };
 
 var Tree =
@@ -34,41 +38,24 @@ function () {
     _classCallCheck(this, Tree);
 
     this.root = null;
-  }
+  } // 后序遍历
+
 
   _createClass(Tree, [{
-    key: "insert",
-    value: function insert(key) {
-      if (key === '#') return;
-
-      if (this.root === null) {
-        this.root = new Node(key);
-      } else this.insertNode(this.root, key);
-    }
-  }, {
-    key: "insertNode",
-    value: function insertNode(node, key) {
-      if (node.left === null) {
-        node.left = new Node(key);
-      } else if (node.right === null) {
-        node.right = new Node(key);
-      } else this.insertNode(node.left, key);
-    } // 先序遍历
-
-  }, {
     key: "preOrderTraverse",
     value: function preOrderTraverse(callback) {
       a = '';
       this.preOrderTraverseNode(this.root, callback);
-      console.log('先序遍历', a);
+      var n = a.replace(/#/g, "");
+      console.log('后序遍历', n);
     }
   }, {
     key: "preOrderTraverseNode",
     value: function preOrderTraverseNode(node, callback) {
       if (node !== null) {
-        callback(node.key);
         this.preOrderTraverseNode(node.left, callback);
         this.preOrderTraverseNode(node.right, callback);
+        callback(node.key);
       }
     } // 中序遍历
 
@@ -77,7 +64,8 @@ function () {
     value: function inOrderTraverse(callback) {
       a = '';
       this.inOrderTraverseNode(this.root, callback);
-      console.log('中序遍历', a);
+      var n = a.replace(/#/g, "");
+      console.log('中序遍历', n);
     }
   }, {
     key: "inOrderTraverseNode",
@@ -113,24 +101,54 @@ function () {
         }
       }
 
-      console.log('层次遍历：', result);
+      result = result.replace(/#/g, '');
+      console.log('层次遍历:', result);
       return result;
+    } // 建立二叉链表
+
+  }, {
+    key: "createbiTree",
+    value: function createbiTree(keys) {
+      this.createbiTreeNode(keys, this.root);
+    }
+  }, {
+    key: "createbiTreeNode",
+    value: function createbiTreeNode(keys, node) {
+      nodeList = nodeList.filter(function (n) {
+        return n.left === null || n.right === null;
+      });
+      var len = nodeList.length;
+      var root = nodeList[len - 1];
+      i++;
+
+      if (keys[i] == '#') {
+        node = new Node('#');
+        root.left === null ? root.left = node : root.right = node;
+      } else {
+        node = new Node(keys[i]);
+
+        if (i === 0) {
+          this.root = node;
+        } else {
+          root.left === null ? root.left = node : root.right = node;
+        }
+
+        nodeList.push(node);
+        this.createbiTreeNode(keys, node.left);
+        this.createbiTreeNode(keys, node.right);
+      }
     }
   }]);
 
   return Tree;
 }();
 
-var b = new Tree();
+var tree = new Tree();
 rl.question('请输入你想插入的数据:', function (p) {
-  var string = p;
-
-  for (var i = 0; i < string.length; i++) {
-    b.insert(string[i]);
-  }
-
-  b.preOrderTraverse(printfNode);
-  b.inOrderTraverse(printfNode);
-  b.levelOrderTraverse();
+  var keys = p;
+  tree.createbiTree(keys);
+  tree.inOrderTraverse(printfNode);
+  tree.preOrderTraverse(printfNode);
+  tree.levelOrderTraverse();
   rl.close();
 });
