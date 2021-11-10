@@ -39,7 +39,7 @@ class Tree {
     preOrderTraverse(callback) {
         a = ''
         this.preOrderTraverseNode(this.root, callback)
-        console.log(a)
+        console.log('先序遍历', a)
     }
     preOrderTraverseNode(node, callback) {
         if (node !== null) {
@@ -52,7 +52,7 @@ class Tree {
     inOrderTraverse(callback) {
         a = ''
         this.inOrderTraverseNode(this.root, callback)
-        console.log(a)
+        console.log('中序遍历', a)
     }
     inOrderTraverseNode(node, callback) {
         if (node != null) {
@@ -76,7 +76,7 @@ class Tree {
                 queue.push(node.right); // 将右子树的根节点入队
             }
         }
-        console.log(result)
+        console.log('层次遍历：', result)
         return result;
     }
 }
@@ -95,4 +95,3 @@ rl.question('请输入你想插入的数据:', (p) => {
     b.levelOrderTraverse()
     rl.close();
 });
-

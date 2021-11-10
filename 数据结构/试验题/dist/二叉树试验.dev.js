@@ -60,7 +60,7 @@ function () {
     value: function preOrderTraverse(callback) {
       a = '';
       this.preOrderTraverseNode(this.root, callback);
-      console.log(a);
+      console.log('先序遍历', a);
     }
   }, {
     key: "preOrderTraverseNode",
@@ -77,7 +77,7 @@ function () {
     value: function inOrderTraverse(callback) {
       a = '';
       this.inOrderTraverseNode(this.root, callback);
-      console.log(a);
+      console.log('中序遍历', a);
     }
   }, {
     key: "inOrderTraverseNode",
@@ -113,7 +113,7 @@ function () {
         }
       }
 
-      console.log(result);
+      console.log('层次遍历：', result);
       return result;
     }
   }]);
