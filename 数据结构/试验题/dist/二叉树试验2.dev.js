@@ -99,40 +99,11 @@ function () {
           // 如果它的右子树不为空
           queue.push(node.right); // 将右子树的根节点入队
         }
-      } // result = result.replace(/#/g, '')
-
-
-      console.log('层次遍历:', result);
-      return result;
-    } // 层次遍历是否是满二叉树
-
-  }, {
-    key: "levelOrderTraverseToIsComplete",
-    value: function levelOrderTraverseToIsComplete() {
-      var node = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.root;
-      var queue = [];
-      queue.push(node);
-
-      while (queue.length) {
-        var _node = queue.shift();
-
-        if (_node !== null) {
-          if (_node.key == '#') {
-            var _a = queue[0];
-
-            if (_a !== null) {
-              if (_a.key !== '#') return '不是一颗完全二叉树';
-            }
-          }
-        }
-
-        if (_node) {
-          queue.push(_node.left);
-          queue.push(_node.right);
-        }
       }
 
-      return '是一颗完全二叉树';
+      result = result.replace(/#/g, '');
+      console.log('层次遍历:', result);
+      return result;
     } // 建立二叉链表
 
   }, {
@@ -179,6 +150,5 @@ rl.question('请输入你想插入的数据:', function (p) {
   tree.inOrderTraverse(printfNode);
   tree.preOrderTraverse(printfNode);
   tree.levelOrderTraverse();
-  console.log(tree.levelOrderTraverseToIsComplete());
   rl.close();
 });

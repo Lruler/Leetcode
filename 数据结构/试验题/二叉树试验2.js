@@ -65,31 +65,9 @@ class Tree {
                 queue.push(node.right); // 将右子树的根节点入队
             }
         }
-        // result = result.replace(/#/g, '')
+        result = result.replace(/#/g, '')
         console.log('层次遍历:', result)
         return result;
-    }
-    // 层次遍历是否是满二叉树
-    levelOrderTraverseToIsComplete(node = this.root) {
-        let queue = []
-        queue.push(node)
-        while (queue.length) {
-            let node = queue.shift()
-            if (node !== null) {
-                if (node.key == '#') {
-                    let a = queue[0]
-                    if (a !== null) {
-                        if (a.key !== '#')
-                            return '不是一颗完全二叉树'
-                    }
-                }
-            }
-            if (node) {
-                queue.push(node.left)
-                queue.push(node.right)
-            }
-        }   
-        return '是一颗完全二叉树'
     }
     // 建立二叉链表
     createbiTree(keys) {
@@ -105,13 +83,11 @@ class Tree {
         if (keys[i] == '#') {
             node = new Node('#')
             root.left === null ? root.left = node : root.right = node
-        }
-        else {
+        } else {
             node = new Node(keys[i])
             if (i === 0) {
                 this.root = node
-            }
-            else {
+            } else {
                 root.left === null ? root.left = node : root.right = node
             }
             nodeList.push(node)
@@ -129,6 +105,5 @@ rl.question('请输入你想插入的数据:', (p) => {
     tree.inOrderTraverse(printfNode)
     tree.preOrderTraverse(printfNode)
     tree.levelOrderTraverse()
-    console.log(tree.levelOrderTraverseToIsComplete())
     rl.close();
 });
