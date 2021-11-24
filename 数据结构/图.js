@@ -6,7 +6,7 @@ const Colors = {
 const initColor = vertices => {
     const color = {}
     for (let i = 0; i < vertices.length; i++) {
-        color[vertices[i] = Colors.WHITE]
+        color[vertices[i]] = Colors.WHITE
     }
     return color
 }
@@ -100,6 +100,5 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
-BFS(graph, 'A', logVer)
+BFS(graph, ver[0] , logVer)
 
-console.log(graph.toString())

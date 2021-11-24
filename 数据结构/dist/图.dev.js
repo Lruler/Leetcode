@@ -16,7 +16,7 @@ var initColor = function initColor(vertices) {
   var color = {};
 
   for (var i = 0; i < vertices.length; i++) {
-    color[vertices[i] = Colors.WHITE];
+    color[vertices[i]] = Colors.WHITE;
   }
 
   return color;
@@ -151,5 +151,4 @@ graph.addEdge('D', 'H');
 graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
-BFS(graph, 'A', logVer);
-console.log(graph.toString());
+BFS(graph, ver[0], logVer);
