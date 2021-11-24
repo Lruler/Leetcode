@@ -91,7 +91,7 @@ function () {
         result += "".concat(node.key); // 访问该节点
 
         if (node.left) {
-          // 如果它的右子树不为空
+          // 如果它的左子树不为空
           queue.push(node.left); // 将左子树的根节点入队
         }
 

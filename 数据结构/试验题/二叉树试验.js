@@ -58,7 +58,7 @@ class Tree {
         while (queue.length) {
             node = queue.shift(); // 出队
             result += `${node.key}`; // 访问该节点
-            if (node.left) { // 如果它的右子树不为空
+            if (node.left) { // 如果它的左子树不为空
                 queue.push(node.left); // 将左子树的根节点入队
             }
             if (node.right) { // 如果它的右子树不为空
