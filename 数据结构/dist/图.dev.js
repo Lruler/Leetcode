@@ -6,6 +6,56 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var Colors = {
+  WHITE: 0,
+  GREY: 1,
+  BLACK: 2
+};
+
+var initColor = function initColor(vertices) {
+  var color = {};
+
+  for (var i = 0; i < vertices.length; i++) {
+    color[vertices[i] = Colors.WHITE];
+  }
+
+  return color;
+};
+
+var logVer = function logVer(v) {
+  return console.log("The vertex:" + v);
+}; // 广度优先 BFS
+
+
+var BFS = function BFS(graph, startVertex, callback) {
+  var vertices = graph.getVertices();
+  var adjList = graph.getAdjList();
+  var color = initColor(vertices);
+  var queue = [];
+  queue.push(startVertex);
+
+  while (queue.length !== 0) {
+    var u = queue.shift();
+    var neighbors = adjList.get(u);
+    color[u] = Colors.GREY;
+
+    for (var i = 0; i < neighbors.length; i++) {
+      var w = neighbors[i];
+
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY;
+        queue.push(w);
+      }
+    }
+
+    color[u] = Colors.BLACK;
+
+    if (callback) {
+      callback(u);
+    }
+  }
+};
+
 var Graph =
 /*#__PURE__*/
 function () {
@@ -84,18 +134,22 @@ function () {
   return Graph;
 }();
 
-var garph = new Graph();
-var ver = ['A', 'B', 'C', 'D', 'E'];
+var graph = new Graph();
+var ver = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
 for (var i = 0; i < ver.length; i++) {
-  garph.addVertex(ver[i]);
+  graph.addVertex(ver[i]);
 }
 
-garph.addEdge('A', 'B');
-garph.addEdge('A', 'C');
-garph.addEdge('A', 'E');
-garph.addEdge('B', 'D');
-garph.addEdge('C', 'E');
-garph.addEdge('C', 'D');
-garph.addEdge('D', 'E');
-console.log(garph.toString());
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('A', 'D');
+graph.addEdge('C', 'D');
+graph.addEdge('C', 'G');
+graph.addEdge('D', 'G');
+graph.addEdge('D', 'H');
+graph.addEdge('B', 'E');
+graph.addEdge('B', 'F');
+graph.addEdge('E', 'I');
+BFS(graph, 'A', logVer);
+console.log(graph.toString());

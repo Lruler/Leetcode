@@ -1,3 +1,40 @@
+const Colors = {
+    WHITE: 0,
+    GREY: 1,
+    BLACK: 2
+}
+const initColor = vertices => {
+    const color = {}
+    for (let i = 0; i < vertices.length; i++) {
+        color[vertices[i] = Colors.WHITE]
+    }
+    return color
+}
+const logVer = v => console.log(`The vertex:` + v)
+// 广度优先 BFS
+const BFS = (graph, startVertex, callback) => {
+    const vertices = graph.getVertices()
+    const adjList = graph.getAdjList()
+    const color = initColor(vertices)
+    let queue = []
+    queue.push(startVertex)
+    while (queue.length !== 0) {
+        const u = queue.shift()
+        const neighbors = adjList.get(u)
+        color[u] = Colors.GREY
+        for (let i = 0; i < neighbors.length; i++) {
+            const w = neighbors[i]
+            if (color[w] === Colors.WHITE) {
+                color[w] = Colors.GREY
+                queue.push(w)
+            }
+        }
+        color[u] = Colors.BLACK
+        if (callback) {
+            callback(u)
+        }
+    }
+}
 class Graph {
     constructor(isDirected = false) {
         this.isDirected = isDirected; //是否有向
@@ -47,17 +84,22 @@ class Graph {
     }
 }
 
-const garph = new Graph()
-const ver = ['A', 'B', 'C', 'D', 'E']
+const graph = new Graph()
+const ver = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
 for (let i = 0; i < ver.length; i++) {
-    garph.addVertex(ver[i])
+    graph.addVertex(ver[i])
 }
-garph.addEdge('A', 'B')
-garph.addEdge('A', 'C')
-garph.addEdge('A', 'E')
-garph.addEdge('B', 'D')
-garph.addEdge('C', 'E')
-garph.addEdge('C', 'D')
-garph.addEdge('D', 'E')
+graph.addEdge('A', 'B')
+graph.addEdge('A', 'C')
+graph.addEdge('A', 'D')
+graph.addEdge('C', 'D')
+graph.addEdge('C', 'G')
+graph.addEdge('D', 'G')
+graph.addEdge('D', 'H')
+graph.addEdge('B', 'E')
+graph.addEdge('B', 'F')
+graph.addEdge('E', 'I')
 
-console.log(garph.toString())
+BFS(graph, 'A', logVer)
+
+console.log(graph.toString())
