@@ -35,6 +35,31 @@ const BFS = (graph, startVertex, callback) => {
         }
     }
 }
+// 深度优先 DFS
+const DFS = (graph, callback) => {
+    const vertices = graph.getVertices()
+    const adjList = graph.getAdjList()
+    const color = initColor(vertices)
+
+    for (let i = 0; i < vertices.length; i++) {
+        if (color[vertices[i]] === Colors.WHITE) {
+            DFSV(vertices[i], color, adjList, callback)
+        }
+    }
+}
+
+const DFSV = (u, color, adjList, callback) => {
+    color[u] = Colors.GREY
+    if (callback) callback(u)
+    const neighbors = adjList.get(u)
+    for (let i = 0; i < neighbors.length; i++) {
+        const w = neighbors[i]
+        if (color[w] === Colors.WHITE) {
+            DFSV(w, color, adjList, callback)
+        }
+    }
+    color[u] = Colors.BLACK
+}
 class Graph {
     constructor(isDirected = false) {
         this.isDirected = isDirected; //是否有向
@@ -100,5 +125,6 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
-BFS(graph, ver[0] , logVer)
+BFS(graph, ver[0], logVer)
+DFS(graph, logVer)
 

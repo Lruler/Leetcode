@@ -54,6 +54,35 @@ var BFS = function BFS(graph, startVertex, callback) {
       callback(u);
     }
   }
+}; // 深度优先 DFS
+
+
+var DFS = function DFS(graph, callback) {
+  var vertices = graph.getVertices();
+  var adjList = graph.getAdjList();
+  var color = initColor(vertices);
+
+  for (var i = 0; i < vertices.length; i++) {
+    if (color[vertices[i]] === Colors.WHITE) {
+      DFSV(vertices[i], color, adjList, callback);
+    }
+  }
+};
+
+var DFSV = function DFSV(u, color, adjList, callback) {
+  color[u] = Colors.GREY;
+  if (callback) callback(u);
+  var neighbors = adjList.get(u);
+
+  for (var i = 0; i < neighbors.length; i++) {
+    var w = neighbors[i];
+
+    if (color[w] === Colors.WHITE) {
+      DFSV(w, color, adjList, callback);
+    }
+  }
+
+  color[u] = Colors.BLACK;
 };
 
 var Graph =
@@ -152,3 +181,4 @@ graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
 BFS(graph, ver[0], logVer);
+DFS(graph, logVer);
