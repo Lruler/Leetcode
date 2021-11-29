@@ -125,6 +125,5 @@ graph.addEdge('B', 'E')
 graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
-BFS(graph, ver[0], logVer)
-DFS(graph, logVer)
+
 
