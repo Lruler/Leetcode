@@ -47,7 +47,6 @@ const DFS = (graph, callback) => {
         }
     }
 }
-
 const DFSV = (u, color, adjList, callback) => {
     color[u] = Colors.GREY
     if (callback) callback(u)
@@ -59,6 +58,10 @@ const DFSV = (u, color, adjList, callback) => {
         }
     }
     color[u] = Colors.BLACK
+}
+// Kruskal算法
+const Kruskal = () => {
+    
 }
 class Graph {
     constructor(isDirected = false) {

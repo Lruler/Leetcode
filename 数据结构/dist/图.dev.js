@@ -83,7 +83,10 @@ var DFSV = function DFSV(u, color, adjList, callback) {
   }
 
   color[u] = Colors.BLACK;
-};
+}; // Kruskal算法
+
+
+var Kruskal = function Kruskal() {};
 
 var Graph =
 /*#__PURE__*/
