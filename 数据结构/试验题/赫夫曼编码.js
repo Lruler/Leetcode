@@ -6,24 +6,30 @@ const rl = readline.createInterface({
 
 class Node {
     constructor(value, char, left, right) {
-        this.val = value; // 字符出现次数  
+        this.val = value; // 字符出现次数  & 权重
         this.char = char; // 待编码字符  
         this.left = left;
         this.right = right;
     }
-}
-// 哈弗曼编码是将一个 字符串序列 用 二进制表示 的压缩算法  
+} 
 class huffmanTree {
     constructor(hash) {
+    /*           
+    let hash = {};
+    for (let i = 0; i < str.length; i++) {
+        hash[str[i]] = ~~hash[str[i]] + 1;
+    }
+    this.hash = hash;
+    this.huffmanTree = this.getHuffmanTree();
+    let map = this.getHuffmanCode(this.huffmanTree);
+    console.log(map);
+    this.binaryStr = this.getBinaryStr(map, str);
+    */
         this.hash = hash;
         this.binaryStr = {}
         // 构造哈夫曼树  
         this.huffmanTree = this.getHuffmanTree();
-
         let map = this.getHuffmanCode(this.huffmanTree);
-        // 查看对照表，即每个字符的二进制编码是什么  
-        // console.log(map);
-
         // 最终的二进制编码  
         for (let key in hash) {
             this.binaryStr[key] = this.getBinaryStr(map, key);
@@ -50,16 +56,16 @@ class huffmanTree {
             let node = new Node(forest[0].val + forest[1].val, '');
             allNodes.push(forest[0]);
             allNodes.push(forest[1]);
-            node.left = allNodes[allNodes.length - 2]; // 左子树放置词频低的  
-            node.right = allNodes[allNodes.length - 1]; // 右子树放置词频高的  
+            node.left = allNodes[allNodes.length - 2]; // 左子树放置权重低的  
+            node.right = allNodes[allNodes.length - 1]; // 右子树放置权重高的  
 
             // 删除最小的两棵树  
             forest = forest.slice(2);
             // 新增的树加入  
             forest.push(node);
         }
-
-        // 生成的哈夫曼树  
+ 
+        // 生成的哈夫曼树  其实就是树的根节点
         return forest[0];
     }
 
@@ -67,11 +73,12 @@ class huffmanTree {
     getHuffmanCode(tree) {
         let hash = {}; // 对照表
         let traversal = (node, curPath) => {
-            if (!node.length && !node.right) return;
+            if (!node.right && !node.left) return; 
             if (node.left && !node.left.left && !node.left.right) {
                 hash[node.left.char] = curPath + '0';
             }
             if (node.right && !node.right.left && !node.right.right) {
+                console.log(node, 2)
                 hash[node.right.char] = curPath + '1';
             }
             // 往左遍历，路径加0  
