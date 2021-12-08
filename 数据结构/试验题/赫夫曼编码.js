@@ -78,7 +78,6 @@ class huffmanTree {
                 hash[node.left.char] = curPath + '0';
             }
             if (node.right && !node.right.left && !node.right.right) {
-                console.log(node, 2)
                 hash[node.right.char] = curPath + '1';
             }
             // 往左遍历，路径加0  
