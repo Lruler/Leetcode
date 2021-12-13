@@ -1,3 +1,9 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 const mazeSearch = function (maze) {
     var matrix = maze
     var m = matrix.length
@@ -67,15 +73,20 @@ let a = [
     [1, 0, 0, 0, 1, 1, 0, 1],
     [0, 1, 1, 1, 0, 0, 0, 0],
 ]
-
-let b = [
-    [0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0],
-    [0, 0, 1, 0, 0, 1],
-    [1, 1, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0]
-]
-
-
-mazeSearch(a)
+let i = 0
+const repeat = () => {
+    if (i == 5) {
+        mazeSearch(a)
+        rl.close()
+        return
+    }
+    i++
+    rl.question('', () => {
+        repeat()
+    })
+}
+rl.question('请输入迷宫行数与列数:', () => {
+    rl.question('请输入迷宫内容:\n', () => {
+        repeat()
+    })
+});
