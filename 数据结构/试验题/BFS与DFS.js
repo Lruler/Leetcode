@@ -1,3 +1,8 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 const Colors = {
     WHITE: 0,
     GREY: 1,
@@ -65,6 +70,7 @@ const DFSV = (u, color, adjList, callback) => {
     }
     color[u] = Colors.BLACK
 }
+// 邻接表实现图
 class Graph {
     constructor(isDirected = false) {
         this.isDirected = isDirected; //是否有向
@@ -114,18 +120,29 @@ class Graph {
     }
 }
 const graph = new Graph()
-graph.addEdge(3, 2)
-graph.addEdge(3, 1)
-graph.addEdge(3, 6)
-graph.addEdge(2, 1)
-graph.addEdge(2, 4)
-graph.addEdge(1, 4)
-graph.addEdge(4, 9)
-graph.addEdge(6, 5)
-graph.addEdge(5, 8)
-graph.addEdge(5, 7)
-graph.addEdge(8, 7)
-console.log('BFS遍历结果')
-BFS(graph, 3, logVer)
-console.log('DFS遍历结果')
-DFS(graph, logVer)
+const saveGraph = (i) => {
+    if (i === 10) {
+        console.log(graph.toString())
+        console.log('BFS遍历结果')
+        BFS(graph, '3', logVer)
+        console.log('DFS遍历结果')
+        DFS(graph, logVer)
+        rl.close();
+        return
+    }
+    ++i
+    rl.question('', (p) => {
+        let adj = p.split(" ")
+        graph.addEdge(adj[0], adj[1])
+        saveGraph(i)
+    });
+}
+
+
+
+rl.question('请输入你想插入的数据\n', (p) => {
+    let i = 0
+    let adj = p.split(" ")
+    graph.addEdge(adj[0], adj[1])
+    saveGraph(i)
+});
