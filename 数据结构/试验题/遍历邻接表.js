@@ -15,7 +15,12 @@ const initColor = vertices => {
     }
     return color
 }
-const logVer = v => console.log(`The vertex:` + v)
+let bfs = ''
+let dfs = ''
+const logVer = (str, u) => {
+    str += (u + " ")
+    bfs = str
+}
 // 广度优先 BFS
 const BFS = (graph, startVertex, callback) => {
     const vertices = graph.getVertices()
@@ -36,9 +41,17 @@ const BFS = (graph, startVertex, callback) => {
         }
         color[u] = Colors.BLACK
         if (callback) {
-            callback(u)
+            callback(bfs, u)
         }
     }
+    let n = Object.entries(color)
+    for (let i = 0; i < n.length; i++) {
+        if (n[i][1] == 0) {
+            console.log(n[i][0])
+            color[n[i][0]] = Colors.BLACK
+        }
+    }
+    console.log(bfs)
 }
 // 深度优先 DFS
 const DFS = (graph, callback) => {
