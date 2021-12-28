@@ -120,9 +120,9 @@ class Graph {
     }
 }
 const graph = new Graph()
-const saveGraph = (i) => {
-    if (i === z - 1) {
-        console.log('')
+const saveGraph = () => {
+    if (graph.vertices.length === z) {
+        console.log(' ')
         console.log(graph.toString())
         console.log('BFS遍历结果')
         BFS(graph, '3', logVer)
@@ -131,7 +131,6 @@ const saveGraph = (i) => {
         rl.close();
         return
     }
-    ++i
     rl.question('', (p) => {
         let adj = p.split(",")
         if (adj.length !== p.length) {
@@ -142,26 +141,25 @@ const saveGraph = (i) => {
         } else {
             graph.addVertex(p)
         }
+        saveGraph()
     });
 }
-
-
 
 var z;
 
 rl.question('请输入图的节点数\n', (n) => {
     z = +n
     rl.question('请输入你想插入的数据\n', (p) => {
-        let i = 0
         let adj = p.split(",")
         if (adj.length !== p.length) {
             let adjF = adj[1].trim().split(" ")
             for (let i = 0; i < adjF.length; i++) {
                 graph.addEdge(adj[0], adjF[i])
             }
-        } else {
+        }
+        else {
             graph.addVertex(p)
         }
-        saveGraph(i)
+        saveGraph()
     });
 })
