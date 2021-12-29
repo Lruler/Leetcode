@@ -15,11 +15,11 @@ const initColor = vertices => {
     }
     return color
 }
-let bfs = ''
-let dfs = ''
+let fs = ''
+
 const logVer = (str, u) => {
     str += (u + " ")
-    bfs = str
+    fs = str
 }
 // 广度优先 BFS
 const BFS = (graph, startVertex, callback) => {
@@ -41,7 +41,7 @@ const BFS = (graph, startVertex, callback) => {
         }
         color[u] = Colors.BLACK
         if (callback) {
-            callback(bfs, u)
+            callback(fs, u)
         }
     }
     let n = Object.entries(color)
@@ -51,7 +51,8 @@ const BFS = (graph, startVertex, callback) => {
             color[n[i][0]] = Colors.BLACK
         }
     }
-    console.log(bfs)
+    console.log(fs)
+    fs = ''
 }
 // 深度优先 DFS
 const DFS = (graph, callback) => {
@@ -70,10 +71,19 @@ const DFS = (graph, callback) => {
             DFSV(vertices[i], color, adjList, callback)
         }
     }
+    let n = Object.entries(color)
+    for (let i = 0; i < n.length; i++) {
+        if (n[i][1] == 0) {
+            console.log(n[i][0])
+            color[n[i][0]] = Colors.BLACK
+        }
+    }
+    console.log(fs)
+    fs = ''
 }
 const DFSV = (u, color, adjList, callback) => {
     color[u] = Colors.GREY
-    if (callback) callback(u)
+    if (callback) callback(fs, u)
     const neighbors = adjList.get(u)
     for (let i = 0; i < neighbors.length; i++) {
         const w = neighbors[i]
@@ -169,8 +179,7 @@ rl.question('请输入图的节点数\n', (n) => {
             for (let i = 0; i < adjF.length; i++) {
                 graph.addEdge(adj[0], adjF[i])
             }
-        }
-        else {
+        } else {
             graph.addVertex(p)
         }
         saveGraph()

@@ -1,9 +1,16 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let dfsStr = ''
 class Adjoin {
     constructor(vertex) {
         this.vertex = vertex;
         this.quantity = vertex.length;
         this.init();
     }
+
     init() {
         this.adjoinArray = Array.from({
             length: this.quantity * this.quantity
@@ -28,27 +35,13 @@ class Adjoin {
         });
     }
     dfs(startId) {
-        const nodes = [];
-        if (startId != null) {
-            const stack = [];
-            stack.push([startId]);
-            while (stack.length !== 0) {
-                const sides = stack.pop();
-                const side = sides[0];
-
-                if (nodes.every(item => item[0] !== side)) {
-                    // 注册节点
-                    nodes.push(sides);
-                    // 结束点退出
-                    if (side === endID) break;
-                    const children = this.getAdjoinVertexs(side);
-                    children.slice().reverse().forEach((item) => {
-                        stack.push([item, side]);
-                    });
-                }
-            }
+        let explored = []
+        let visited = []
+        this.dfsV(explored, visited, [startId])
+        for (let i = 0; i < this.vertex.length; i++) {
+            if (!visited.includes(this.vertex[i])) console.log(this.vertex[i])
         }
-        return nodes;
+        console.log(dfsStr)
     }
     bfs(startId) {
         let str = ''
@@ -85,32 +78,73 @@ class Adjoin {
                 }
             }
             visited.push(v)
-            console.log(v)
+            dfsStr += v + " "
             this.dfsV(explored, visited, stack)
         }
     }
     toString() {
         let str = ''
         for (let i = 0; i < this.adjoinArray.length; i++) {
-            str += (i + 1) % 5 ? this.adjoinArray[i] + ' ' : this.adjoinArray[i] + '\n'
+            str += (i + 1) % 10 ? this.adjoinArray[i] + ' ' : this.adjoinArray[i] + '\n'
         }
         console.log(str)
     }
 }
 
+var demo
+var end = []
+const saveGraph = () => {
+    if (end.length === 1) {
+        console.log('')
+        demo.toString()
+        console.log('广度遍历结果')
+        demo.bfs('3')
+        console.log('深度遍历结果')
+        demo.dfs('3')
+        rl.close();
+        return
+    }
+    rl.question('', (p) => {
+        let adj = p.split(",")
+        if (adj.length !== p.length) {
+            let adjF = adj[1].trim().split(" ")
+            demo.setAdjoinVertexs(adj[0], adjF)
+        } else {
+            end = adj
+            demo.setAdjoinVertexs(adj, [])
+        }
+        saveGraph()
+    });
+}
 
-
-// 创建矩阵
-const demo = new Adjoin([0, 1, 2, 3, 4])
+rl.question('请输入图的节点数\n', (n) => {
+    let a = []
+    for (let i = 0; i < +n; i++) {
+        a.push(`${i}`)
+    }
+    demo = new Adjoin(a)
+    rl.question('请输入你想插入的数据\n', (p) => {
+        let adj = p.split(",")
+        if (adj.length !== p.length) {
+            let adjF = adj[1].trim().split(" ")
+            demo.setAdjoinVertexs(adj[0], adjF)
+        } else {
+            end = adj
+            demo.setAdjoinVertexs(adj, [])
+        }
+        saveGraph()
+    });
+})
 
 // 注册邻接点
-demo.setAdjoinVertexs(1, [2, 3])
-demo.setAdjoinVertexs(2, [1, 4])
-demo.setAdjoinVertexs(4, [2])
-demo.setAdjoinVertexs(3, [1])
-demo.setAdjoinVertexs(0, [])
+// demo.setAdjoinVertexs(3, [2, 1, 6])
+// demo.setAdjoinVertexs(2, [3, 1, 4])
+// demo.setAdjoinVertexs(1, [3, 2, 4])
+// demo.setAdjoinVertexs(4, [2, 1, 9])
+// demo.setAdjoinVertexs(9, [4])
+// demo.setAdjoinVertexs(6, [3, 5])
+// demo.setAdjoinVertexs(5, [6, 8, 7])
+// demo.setAdjoinVertexs(7, [5, 8])
+// demo.setAdjoinVertexs(8, [7, 5])
 
-
-demo.toString()
-
-console.log(demo.bfs(1))
+// console.log(demo.dfsV([],[],[3]))
