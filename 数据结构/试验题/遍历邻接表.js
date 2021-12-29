@@ -148,7 +148,7 @@ const saveGraph = () => {
         console.log(' ')
         console.log(graph.toString())
         console.log('BFS遍历结果')
-        BFS(graph, '3', logVer)
+        BFS(graph, 'A', logVer)
         console.log('DFS遍历结果')
         DFS(graph, logVer)
         rl.close();

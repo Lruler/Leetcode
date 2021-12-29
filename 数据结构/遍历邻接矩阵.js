@@ -98,9 +98,9 @@ const saveGraph = () => {
         console.log('')
         demo.toString()
         console.log('广度遍历结果')
-        demo.bfs('3')
+        demo.bfs('A')
         console.log('深度遍历结果')
-        demo.dfs('3')
+        demo.dfs('A')
         rl.close();
         return
     }
@@ -118,11 +118,7 @@ const saveGraph = () => {
 }
 
 rl.question('请输入图的节点数\n', (n) => {
-    let a = []
-    for (let i = 0; i < +n; i++) {
-        a.push(`${i}`)
-    }
-    demo = new Adjoin(a)
+    demo = new Adjoin(['A', 'B', 'C', 'D', 'E', 'F', 'G'])
     rl.question('请输入你想插入的数据\n', (p) => {
         let adj = p.split(",")
         if (adj.length !== p.length) {
